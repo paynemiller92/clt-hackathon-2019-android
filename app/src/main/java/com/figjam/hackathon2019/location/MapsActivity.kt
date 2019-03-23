@@ -17,11 +17,15 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import com.figjam.hackathon2019.R
+import com.figjam.hackathon2019.clinic.ClinicRepository
+import com.figjam.hackathon2019.models.Clinic
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+
+    var googleMap: GoogleMap? = null
 
     private val locationViewModel by viewModel<LocationViewModel>()
     companion object {
@@ -37,6 +41,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+        this.googleMap = googleMap
         locationViewModel.currentLocation.observe(this, Observer { coordinate ->
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate))
 
@@ -45,6 +50,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .position(LatLng(coordinate.latitude, coordinate.longitude))
                     .title("Hello world")
             )
+        })
+        ClinicRepository().getAllClinics(onSuccess = { clinics ->
+            markClinics(clinics)
+        }, onError = {
+
         })
     }
 
@@ -59,7 +69,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             else -> { }
         }
     }
-
 
     private fun getLocation() {
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -88,12 +97,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+
     private fun checkLocationPermission(): Boolean {
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
 
-
-
-
+    private fun markClinics(clinics: List<Clinic>) {
+        for (clinic: Clinic in clinics) {
+            googleMap?.addMarker(
+                MarkerOptions()
+                    .position(LatLng(clinic.latitude!!, clinic.longitude!!))
+                    .title(clinic.name)
+            )
+        }
+    }
 }

@@ -2,21 +2,49 @@ package com.figjam.hackathon2019.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 class Clinic() : Parcelable {
+    @SerializedName("city")
     var city: String? = null
+
+    @SerializedName("faxNumber")
     var faxNumber: String? = null
+
+    @SerializedName("fee")
     var fee: Double? = null
+
+    @SerializedName("isAppointmentOnly")
     var isAppointmentOnly: Boolean? = null
+
+    @SerializedName("isSpanishSpeaking")
     var isSpanishSpeaking: Boolean? = null
+
+    @SerializedName("name")
     var name: String? = null
+
+    @SerializedName("phoneNumber")
     var phoneNumber: String? = null
+
+    @SerializedName("services")
     var services: List<String>? = null
+
+    @SerializedName("state")
     var state: String? = null
+
+    @SerializedName("streetAddress")
     var streetAddress: String? = null
+
+    @SerializedName("url'")
     var url: String? = null
+
+    @SerializedName("zipCode")
     var zipCode: String? = null
+
+    @SerializedName("latitude")
     var latitude: Double? = null
+
+    @SerializedName("longitude")
     var longitude: Double? = null
 
     constructor(parcel: Parcel) : this() {
