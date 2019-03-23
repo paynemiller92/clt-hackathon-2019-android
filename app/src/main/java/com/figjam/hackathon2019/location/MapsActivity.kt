@@ -37,12 +37,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        locationViewModel.currentLocation.observe(this, Observer {
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(it))
+        locationViewModel.currentLocation.observe(this, Observer { coordinate ->
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate))
 
             googleMap.addMarker(
                 MarkerOptions()
-                    .position(LatLng(it.latitude, it.longitude))
+                    .position(LatLng(coordinate.latitude, coordinate.longitude))
                     .title("Hello world")
             )
         })
