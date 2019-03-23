@@ -35,7 +35,7 @@ class Clinic() : Parcelable {
     @SerializedName("streetAddress")
     var streetAddress: String? = null
 
-    @SerializedName("url'")
+    @SerializedName("url")
     var url: String? = null
 
     @SerializedName("zipCode")

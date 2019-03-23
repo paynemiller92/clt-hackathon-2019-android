@@ -2,6 +2,7 @@ package com.figjam.hackathon2019.clinic
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -25,7 +26,32 @@ class ClinicDetailActivity : AppCompatActivity() {
         }
         configureClinicDetails()
         configureServices()
+        configureActions()
+    }
 
+    private fun configureActions() {
+        findViewById<View>(R.id.image_view_call_clinic).setOnClickListener {
+            callClinic()
+        }
+
+        findViewById<View>(R.id.image_view_clinic_website).setOnClickListener {
+            viewClinicWebsite()
+        }
+
+        findViewById<View>(R.id.image_view_clinic_directions).setOnClickListener {
+            viewClinicDirections()
+        }
+    }
+
+    private fun viewClinicWebsite() {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(clinic.url)
+        startActivity(intent)
+    }
+
+    private fun viewClinicDirections() {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=" + clinic.latitude + "," + clinic.longitude))
+        startActivity(intent)
     }
 
     private fun configureClinicDetails() {
@@ -47,6 +73,11 @@ class ClinicDetailActivity : AppCompatActivity() {
         findViewById<View>(R.id.linear_layout_acute).visibility = map.get(clinic.hasAcute())!!
         findViewById<View>(R.id.linear_layout_lab).visibility = map.get(clinic.hasLab())!!
         findViewById<View>(R.id.linear_layout_std).visibility = map.get(clinic.hasStdTesting())!!
+    }
+
+    private fun callClinic() {
+        val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", clinic.phoneNumber, null))
+        startActivity(intent)
     }
 
     companion object {
