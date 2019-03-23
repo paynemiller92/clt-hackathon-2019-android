@@ -60,12 +60,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         this.googleMap = googleMap
         locationViewModel.currentLocation.observe(this, Observer { coordinate ->
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate))
-
-            googleMap.addMarker(
-                MarkerOptions()
-                    .position(LatLng(coordinate.latitude, coordinate.longitude))
-                    .title("My Location")
-            )
+  
             googleMap.setOnInfoWindowClickListener { marker ->
                 val clinic: Clinic? = clinicMarkerMap?.get(marker)
                 if (clinic != null) {
@@ -127,6 +122,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun markClinics(clinics: List<Clinic>) {
+        googleMap?.clear()
+        clinicMarkerMap?.clear()
         for (clinic: Clinic in clinics) {
             val marker: Marker? = googleMap?.addMarker(
                 MarkerOptions()
