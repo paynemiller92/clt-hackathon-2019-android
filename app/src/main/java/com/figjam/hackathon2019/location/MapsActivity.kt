@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.figjam.hackathon2019.R
+import com.figjam.hackathon2019.clinic.ClinicDetailActivity
 import com.figjam.hackathon2019.clinic.ClinicRepository
 import com.figjam.hackathon2019.models.Clinic
 import com.google.android.gms.maps.model.LatLng
@@ -62,6 +63,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             )
             googleMap.setOnInfoWindowClickListener { marker ->
                 val clinic: Clinic? = clinicMarkerMap?.get(marker)
+                if (clinic != null) {
+                    ClinicDetailActivity.startActivity(context!!, clinic)
+                }
                 false
             }
         })

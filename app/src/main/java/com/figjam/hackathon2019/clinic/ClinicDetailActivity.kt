@@ -25,11 +25,12 @@ class ClinicDetailActivity : AppCompatActivity() {
 
     companion object {
         private val CLINIC = "clinic"
+
+        fun startActivity(context: Context, clinic: Clinic) {
+            val intent = Intent(context, ClinicDetailActivity::class.java).apply {
+                putExtra(CLINIC, clinic)
+            }
+            context.startActivity(intent)
+        }
     }
-
-    private fun Intent.addClinic(clinic: Clinic) = putExtra(CLINIC, clinic)
-
-    fun Context.startClinicDetailActivity(clinic: Clinic) =
-        Intent(this, ClinicDetailActivity::class.java)
-            .apply { addClinic(clinic) }.let(this::startActivity)
 }
