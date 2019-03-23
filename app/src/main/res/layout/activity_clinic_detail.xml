@@ -40,7 +40,7 @@
               android:text="Services" android:textSize="18sp"/>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+                  android:orientation="horizontal" android:id="@+id/linear_layout_primary">
         <ImageView android:layout_width="50dp"
                    android:layout_height="50dp"
                    android:src="@drawable/ic_hospital" android:id="@+id/image_view_primary_care"
@@ -54,7 +54,7 @@
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+                  android:orientation="horizontal" android:id="@+id/linear_layout_dental">
         <ImageView android:layout_width="50dp"
                    android:layout_height="50dp"
                    android:src="@drawable/ic_smile" android:id="@+id/image_view_dental"
@@ -70,7 +70,7 @@
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+                  android:orientation="horizontal" android:id="@+id/linear_layout_mental">
         <ImageView android:layout_width="50dp"
                    android:layout_height="50dp"
                    android:src="@drawable/ic_group"
@@ -86,7 +86,7 @@
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+                  android:orientation="horizontal" android:id="@+id/linear_layout_chronic">
         <ImageView android:layout_width="50dp"
                    android:layout_height="50dp"
                    android:src="@drawable/ic_hourglass"
@@ -102,7 +102,7 @@
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+                  android:orientation="horizontal" android:id="@+id/linear_layout_lab">
         <ImageView android:layout_width="50dp"
                    android:layout_height="50dp"
                    android:src="@drawable/ic_medicine"
@@ -118,7 +118,7 @@
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+                  android:orientation="horizontal" android:id="@+id/linear_layout_acute">
         <ImageView android:layout_width="50dp"
                    android:layout_height="50dp"
                    android:src="@drawable/ic_frown"
@@ -134,7 +134,7 @@
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+                  android:orientation="horizontal" android:id="@+id/linear_layout_std">
         <ImageView android:layout_width="50dp"
                    android:layout_height="50dp"
                    android:src="@drawable/ic_chart"

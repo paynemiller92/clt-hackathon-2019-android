@@ -94,4 +94,55 @@ class Clinic() : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
+    fun getProvincialAddress(): String {
+        return this.city + ", " + this.state + " " + this.zipCode
+    }
+
+    fun hasPrimaryCare(): Boolean {
+        return hasService("Primary Medical Care")
+    }
+
+    fun hasDental(): Boolean {
+        return hasService("Dental")
+    }
+
+    fun hasBehavioral(): Boolean {
+        return hasService("Behavior Health")
+    }
+
+    fun hasPediatric(): Boolean {
+        return hasService("Pediatric Care")
+    }
+
+    fun hasMentalHealthServices(): Boolean {
+        return hasService("Mental Health Services")
+    }
+
+    fun hasChronic(): Boolean {
+        return hasService("Chronic Disease Management")
+    }
+
+    fun hasAcute(): Boolean {
+        return hasService("Acute Episodic Disease Management")
+    }
+
+    fun hasStdTesting(): Boolean {
+        return hasService("STD Testing")
+    }
+
+    fun hasLab(): Boolean {
+        return hasService("Lab Services")
+    }
+
+    private fun hasService(serviceName: String): Boolean {
+        if (services != null) {
+            for (service: String in services!!) {
+                if (service.equals(serviceName, true)) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
 }
