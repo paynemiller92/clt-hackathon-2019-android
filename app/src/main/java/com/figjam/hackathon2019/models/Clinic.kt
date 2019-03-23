@@ -35,7 +35,7 @@ class Clinic() : Parcelable {
     @SerializedName("streetAddress")
     var streetAddress: String? = null
 
-    @SerializedName("url'")
+    @SerializedName("url")
     var url: String? = null
 
     @SerializedName("zipCode")
@@ -46,6 +46,9 @@ class Clinic() : Parcelable {
 
     @SerializedName("longitude")
     var longitude: Double? = null
+
+    @SerializedName("imageUrl")
+    var imageUrl: String? = null
 
     constructor(parcel: Parcel) : this() {
         city = parcel.readString()
@@ -62,6 +65,7 @@ class Clinic() : Parcelable {
         zipCode = parcel.readString()
         latitude = parcel.readValue(Double::class.java.classLoader) as? Double
         longitude = parcel.readValue(Double::class.java.classLoader) as? Double
+        imageUrl = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -79,6 +83,7 @@ class Clinic() : Parcelable {
         parcel.writeString(zipCode)
         parcel.writeValue(latitude)
         parcel.writeValue(longitude)
+        parcel.writeString(imageUrl)
     }
 
     override fun describeContents(): Int {
@@ -93,5 +98,56 @@ class Clinic() : Parcelable {
         override fun newArray(size: Int): Array<Clinic?> {
             return arrayOfNulls(size)
         }
+    }
+
+    fun getProvincialAddress(): String {
+        return this.city + ", " + this.state + " " + this.zipCode
+    }
+
+    fun hasPrimaryCare(): Boolean {
+        return hasService("Primary Medical Care")
+    }
+
+    fun hasDental(): Boolean {
+        return hasService("Dental")
+    }
+
+    fun hasBehavioral(): Boolean {
+        return hasService("Behavior Health")
+    }
+
+    fun hasPediatric(): Boolean {
+        return hasService("Pediatric Care")
+    }
+
+    fun hasMentalHealthServices(): Boolean {
+        return hasService("Mental Health Services")
+    }
+
+    fun hasChronic(): Boolean {
+        return hasService("Chronic Disease Management")
+    }
+
+    fun hasAcute(): Boolean {
+        return hasService("Acute Episodic Disease Management")
+    }
+
+    fun hasStdTesting(): Boolean {
+        return hasService("STD Testing")
+    }
+
+    fun hasLab(): Boolean {
+        return hasService("Lab Services")
+    }
+
+    private fun hasService(serviceName: String): Boolean {
+        if (services != null) {
+            for (service: String in services!!) {
+                if (service.equals(serviceName, true)) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 }
