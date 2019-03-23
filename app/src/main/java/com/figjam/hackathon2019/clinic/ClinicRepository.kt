@@ -21,7 +21,11 @@ class ClinicRepository {
                 }
 
                 override fun onResponse(call: Call<List<Clinic>>, response: Response<List<Clinic>>) {
-                    onSuccess(response.body().orEmpty())
+                    if (response.body().isNullOrEmpty()) {
+                        onError()
+                    } else {
+                        onSuccess(response.body().orEmpty())
+                    }
                 }
             })
     }
