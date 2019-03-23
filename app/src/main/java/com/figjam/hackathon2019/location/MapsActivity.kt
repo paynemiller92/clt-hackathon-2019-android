@@ -19,16 +19,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.figjam.hackathon2019.R
 import com.figjam.hackathon2019.clinic.ClinicRepository
 import com.figjam.hackathon2019.models.Clinic
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 
 class MapFragment : Fragment(), OnMapReadyCallback {
 
     var googleMap: GoogleMap? = null
+    var clinicMarkerMap: MutableMap<Marker?, Clinic>? = HashMap()
 
     private val locationViewModel by viewModel<LocationViewModel>()
     companion object {
@@ -55,8 +58,12 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             googleMap.addMarker(
                 MarkerOptions()
                     .position(LatLng(coordinate.latitude, coordinate.longitude))
-                    .title("Hello world")
+                    .title("My Location")
             )
+            googleMap.setOnInfoWindowClickListener { marker ->
+                val clinic: Clinic? = clinicMarkerMap?.get(marker)
+                false
+            }
         })
         ClinicRepository().getAllClinics(onSuccess = { clinics ->
             markClinics(clinics)
@@ -112,11 +119,12 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     private fun markClinics(clinics: List<Clinic>) {
         for (clinic: Clinic in clinics) {
-            googleMap?.addMarker(
+            val marker: Marker? = googleMap?.addMarker(
                 MarkerOptions()
                     .position(LatLng(clinic.latitude!!, clinic.longitude!!))
                     .title(clinic.name)
             )
+            clinicMarkerMap?.put(marker, clinic)
         }
     }
 }
