@@ -36,6 +36,21 @@
                       android:textColor="@android:color/black"
                       android:textSize="15sp"
                       android:textAlignment="center"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:layout_marginStart="20dp" android:layout_marginEnd="20dp">
+                <ImageView android:id="@+id/image_view_call_clinic"
+                           android:layout_width="75dp"
+                           android:layout_height="75dp"
+                           android:src="@drawable/ic_ic_phone_2" android:layout_weight="0.3"/>
+                <ImageView android:id="@+id/image_view_clinic_website"
+                           android:layout_width="75dp"
+                           android:layout_height="75dp"
+                           android:src="@drawable/ic_globe" android:layout_weight="0.3"/>
+                <ImageView android:id="@+id/image_view_clinic_directions"
+                           android:layout_width="75dp"
+                           android:layout_height="75dp"
+                           android:src="@drawable/ic_bus" android:layout_weight="0.3"/>
+            </LinearLayout>
             <Space android:layout_width="match_parent"
                    android:layout_height="24dp"/>
             <TextView android:layout_width="wrap_content"
@@ -48,7 +63,7 @@
                 <ImageView android:layout_width="50dp"
                            android:layout_height="50dp"
                            android:src="@drawable/ic_hospital" android:id="@+id/image_view_primary_care"
-                           android:tint="@android:color/holo_red_dark"/>
+                           android:tint="@android:color/holo_red_dark" android:scaleType="fitXY"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:text="Primary Medical Care"
