@@ -20,11 +20,15 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.figjam.hackathon2019.R
+import com.figjam.hackathon2019.clinic.ClinicRepository
+import com.figjam.hackathon2019.models.Clinic
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
 class MapFragment : Fragment(), OnMapReadyCallback {
+
+    var googleMap: GoogleMap? = null
 
     private val locationViewModel by viewModel<LocationViewModel>()
     companion object {
@@ -44,6 +48,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+        this.googleMap = googleMap
         locationViewModel.currentLocation.observe(this, Observer { coordinate ->
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate))
 
@@ -52,6 +57,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                     .position(LatLng(coordinate.latitude, coordinate.longitude))
                     .title("Hello world")
             )
+        })
+        ClinicRepository().getAllClinics(onSuccess = { clinics ->
+            markClinics(clinics)
+        }, onError = {
+
         })
     }
 
@@ -66,7 +76,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             else -> { }
         }
     }
-
 
     private fun getLocation() {
         val locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -95,12 +104,19 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     }
 
+
     private fun checkLocationPermission(): Boolean {
         return ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
 
-
-
-
+    private fun markClinics(clinics: List<Clinic>) {
+        for (clinic: Clinic in clinics) {
+            googleMap?.addMarker(
+                MarkerOptions()
+                    .position(LatLng(clinic.latitude!!, clinic.longitude!!))
+                    .title(clinic.name)
+            )
+        }
+    }
 }
