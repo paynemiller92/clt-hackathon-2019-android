@@ -23,10 +23,12 @@ import androidx.navigation.findNavController
 import com.figjam.hackathon2019.R
 import com.figjam.hackathon2019.clinic.ClinicDetailActivity
 import com.figjam.hackathon2019.clinic.ClinicRepository
+import com.figjam.hackathon2019.clinic.ClinicViewModel
 import com.figjam.hackathon2019.models.Clinic
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class MapFragment : Fragment(), OnMapReadyCallback {
@@ -35,6 +37,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     var clinicMarkerMap: MutableMap<Marker?, Clinic>? = HashMap()
 
     private val locationViewModel by viewModel<LocationViewModel>()
+    private val clinicViewModel by sharedViewModel<ClinicViewModel>()
+
+
     companion object {
         const val LOCATION_PERMISSION = 1
     }
@@ -69,11 +74,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 false
             }
         })
-        ClinicRepository().getAllClinics(onSuccess = { clinics ->
-            markClinics(clinics)
-        }, onError = {
 
+        clinicViewModel.clinics.observe(this, Observer { clinics ->
+            markClinics(clinics)
         })
+
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
