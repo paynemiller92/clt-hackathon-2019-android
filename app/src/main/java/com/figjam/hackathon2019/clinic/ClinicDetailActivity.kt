@@ -29,7 +29,7 @@ class ClinicDetailActivity : AppCompatActivity() {
 
     private fun Intent.addClinic(clinic: Clinic) = putExtra(CLINIC, clinic)
 
-    fun Context.startMyActivity(clinic: Clinic) =
+    fun Context.startClinicDetailActivity(clinic: Clinic) =
         Intent(this, ClinicDetailActivity::class.java)
             .apply { addClinic(clinic) }.let(this::startActivity)
 }
