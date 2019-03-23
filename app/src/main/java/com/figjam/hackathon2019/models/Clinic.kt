@@ -47,6 +47,9 @@ class Clinic() : Parcelable {
     @SerializedName("longitude")
     var longitude: Double? = null
 
+    @SerializedName("imageUrl")
+    var imageUrl: String? = null
+
     constructor(parcel: Parcel) : this() {
         city = parcel.readString()
         faxNumber = parcel.readString()
@@ -62,6 +65,7 @@ class Clinic() : Parcelable {
         zipCode = parcel.readString()
         latitude = parcel.readValue(Double::class.java.classLoader) as? Double
         longitude = parcel.readValue(Double::class.java.classLoader) as? Double
+        imageUrl = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -79,6 +83,7 @@ class Clinic() : Parcelable {
         parcel.writeString(zipCode)
         parcel.writeValue(latitude)
         parcel.writeValue(longitude)
+        parcel.writeString(imageUrl)
     }
 
     override fun describeContents(): Int {

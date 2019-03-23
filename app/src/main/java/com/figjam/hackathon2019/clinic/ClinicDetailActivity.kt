@@ -2,13 +2,14 @@ package com.figjam.hackathon2019.clinic
 
 import android.content.Context
 import android.content.Intent
-import android.opengl.Visibility
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.figjam.hackathon2019.R
 import com.figjam.hackathon2019.models.Clinic
+import com.squareup.picasso.Picasso
 
 class ClinicDetailActivity : AppCompatActivity() {
 
@@ -31,6 +32,8 @@ class ClinicDetailActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.text_view_clinic_name).text = clinic.name
         findViewById<TextView>(R.id.text_view_street_address).text = clinic.streetAddress
         findViewById<TextView>(R.id.text_view_city_state_zip).text = clinic.getProvincialAddress()
+        val clinicImage:ImageView = findViewById(R.id.image_view_clinic)
+        Picasso.get().load(clinic.imageUrl).into(clinicImage)
     }
 
     private fun configureServices() {
