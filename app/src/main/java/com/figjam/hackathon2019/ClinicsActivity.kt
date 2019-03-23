@@ -9,6 +9,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import android.widget.ArrayAdapter
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val sheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+
         navController = Navigation.findNavController(this, R.id.mainNavigationFragment)
 
         val navGraph = navController.navInflater.inflate(R.navigation.navgraph)
@@ -29,14 +35,25 @@ class MainActivity : AppCompatActivity() {
 
         clinicViewModel.getClinics()
 
+        fab.setOnClickListener {
+            if (sheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+                sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            } else {
+                sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+        }
+
         clinicViewModel.services.observe(this, Observer {
-            fab.setOnClickListener {
+            servicesFilterButton.setOnClickListener {
+                sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 selectServices()
             }
+
+            feesFilterButton.setOnClickListener {
+                sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                selectFees()
+            }
         })
-
-
-
     }
 
     override fun onSupportNavigateUp() =
@@ -55,4 +72,20 @@ class MainActivity : AppCompatActivity() {
         }.setPositiveButton("Done!", null)
         builder.create().show()
     }
+
+    private fun selectFees() {
+        val builderSingle = AlertDialog.Builder(this)
+        builderSingle.setTitle("Select Fee Range")
+        val arrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
+        arrayAdapter.add("Free")
+        arrayAdapter.add("< $11.00")
+        arrayAdapter.add("< $15.00")
+        builderSingle.setNegativeButton("cancel") { dialog, which -> dialog.dismiss() }
+
+        builderSingle.setAdapter(arrayAdapter) { _, which ->
+           clinicViewModel.setFeeLimit(which)
+        }
+        builderSingle.show()
+    }
+
 }

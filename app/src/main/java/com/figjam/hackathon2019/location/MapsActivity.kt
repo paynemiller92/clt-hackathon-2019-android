@@ -58,9 +58,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
+        googleMap.moveCamera(CameraUpdateFactory.zoomTo(10f))
         locationViewModel.currentLocation.observe(this, Observer { coordinate ->
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate))
-  
+
             googleMap.setOnInfoWindowClickListener { marker ->
                 val clinic: Clinic? = clinicMarkerMap?.get(marker)
                 if (clinic != null) {
@@ -95,6 +96,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
             override fun onLocationChanged(location: Location) {
                 locationViewModel.currentLocation.value = LatLng(location.latitude, location.longitude)
+                locationManager.removeUpdates(this)
             }
 
             override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {

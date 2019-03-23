@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <fragment
             android:id="@+id/mainNavigationFragment"
@@ -13,12 +14,43 @@
             android:layout_height="match_parent"
             app:defaultNavHost="true"/>
 
+    <LinearLayout
+            android:id="@+id/bottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:orientation="horizontal"
+            android:background="#50000000"
+            android:gravity="center"
+            app:behavior_hideable="true"
+            app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/servicesFilterButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="Services"
+                android:textColor="#fff"
+                android:background="@color/colorAccent"
+                android:layout_margin="16dp"/>
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/feesFilterButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="Fees"
+                android:textColor="#ffffff"
+                android:layout_margin="16dp"
+                android:background="@color/colorAccent"/>
+
+    </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
+            app:layout_anchorGravity="end|top"
             android:src="@drawable/ic_filter_list"
+            app:layout_anchor="@id/bottomSheet"
             android:layout_margin="16dp"/>
 
-</FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

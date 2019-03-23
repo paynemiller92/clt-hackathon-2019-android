@@ -7,11 +7,12 @@ import com.figjam.hackathon2019.models.Clinic
 class ClinicViewModel(private var repository:ClinicRepository): ViewModel() {
 
     private var allClinics = ArrayList<Clinic>()
+    private val selectedServices = MutableLiveData<List<String>>()
+    private val selectedServiceKeys = ArrayList<String>()
+    private var feeLimit: Double = 1000.00
+
     val clinics = MutableLiveData<List<Clinic>>()
     val services = MutableLiveData<List<String>>()
-    val selectedServices = MutableLiveData<List<String>>()
-
-    private val selectedServiceKeys = ArrayList<String>()
 
     lateinit var selectedItems: BooleanArray
 
@@ -39,8 +40,17 @@ class ClinicViewModel(private var repository:ClinicRepository): ViewModel() {
         filterClinics()
     }
 
+    fun setFeeLimit(index: Int) {
+        when (index) {
+            0 -> feeLimit = 0.00
+            1 -> feeLimit = 10.99
+            else -> feeLimit = 1000.00
+        }
+        filterClinics()
+    }
+
     private fun filterClinics() {
-        val filteredClinics = ArrayList<Clinic>()
+        var serviceFilteredClinics = ArrayList<Clinic>()
         if (selectedServiceKeys.isNotEmpty()) {
             allClinics.forEach { clinic ->
                 with(clinic) {
@@ -51,14 +61,21 @@ class ClinicViewModel(private var repository:ClinicRepository): ViewModel() {
                         }
                     }
                     if (found) {
-                        filteredClinics.add(clinic)
+                        serviceFilteredClinics.add(clinic)
                     }
                 }
             }
-            this.clinics.value = filteredClinics
         } else {
-            this.clinics.value = allClinics
+            serviceFilteredClinics = allClinics
         }
+
+        val filteredClinics = ArrayList<Clinic>()
+        serviceFilteredClinics.forEach { clinic ->
+            if (clinic.fee!! <= feeLimit) {
+                filteredClinics.add(clinic)
+            }
+        }
+        this.clinics.value = filteredClinics
     }
 
     private fun getServices(clinics: List<Clinic>) {
