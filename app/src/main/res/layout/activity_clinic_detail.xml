@@ -7,146 +7,152 @@
         tools:context=".clinic.ClinicDetailActivity"
         android:orientation="vertical"
         android:padding="8dp">
-    <TextView android:id="@+id/text_view_clinic_name"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:text="Clinic Name"
-              android:textColor="@android:color/black"
-              android:textAlignment="center" android:textSize="18sp"/>
-    <ImageView android:id="@+id/image_view_clinic"
-               android:layout_width="350dp"
-               android:layout_height="160dp"
-               android:scaleType="fitCenter"
-               android:layout_gravity="center_horizontal"/>
-    <TextView android:id="@+id/text_view_street_address"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:text="123 Clinic Lane."
-              android:textColor="@android:color/black"
-              android:textSize="15sp"
-              android:textAlignment="center"/>
-    <TextView android:id="@+id/text_view_city_state_zip"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:text="Charlotte, NC 28277"
-              android:textColor="@android:color/black"
-              android:textSize="15sp"
-              android:textAlignment="center"/>
-    <Space android:layout_width="match_parent"
-           android:layout_height="24dp"/>
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textColor="@android:color/black"
-              android:text="Services" android:textSize="18sp"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal" android:id="@+id/linear_layout_primary">
-        <ImageView android:layout_width="50dp"
-                   android:layout_height="50dp"
-                   android:src="@drawable/ic_hospital" android:id="@+id/image_view_primary_care"
-                   android:tint="@android:color/holo_red_dark"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Primary Medical Care"
-                  android:textColor="@android:color/black"
-                  android:textSize="21dp" android:textAlignment="center" android:layout_gravity="center_vertical"
-                  android:id="@+id/text_view_primary_care"/>
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal" android:id="@+id/linear_layout_dental">
-        <ImageView android:layout_width="50dp"
-                   android:layout_height="50dp"
-                   android:src="@drawable/ic_smile" android:id="@+id/image_view_dental"
-                   android:tint="?attr/colorPrimaryDark"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Dental"
-                  android:textColor="@android:color/black"
-                  android:textSize="21dp"
-                  android:textAlignment="center"
-                  android:layout_gravity="center_vertical"
-                  android:id="@+id/text_view_dental"/>
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal" android:id="@+id/linear_layout_mental">
-        <ImageView android:layout_width="50dp"
-                   android:layout_height="50dp"
-                   android:src="@drawable/ic_group"
-                   android:id="@+id/image_view_mental_health" android:tint="@android:color/holo_blue_dark"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Mental Health Services"
-                  android:textColor="@android:color/black"
-                  android:textSize="21dp"
-                  android:textAlignment="center"
-                  android:layout_gravity="center_vertical"
-                  android:id="@+id/text_view_mental_health"/>
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal" android:id="@+id/linear_layout_chronic">
-        <ImageView android:layout_width="50dp"
-                   android:layout_height="50dp"
-                   android:src="@drawable/ic_hourglass"
-                   android:id="@+id/image_view_chronic"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Chronic Disease Management"
-                  android:textColor="@android:color/black"
-                  android:textSize="21dp"
-                  android:textAlignment="center"
-                  android:layout_gravity="center_vertical"
-                  android:id="@+id/text_view_chronic"/>
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal" android:id="@+id/linear_layout_lab">
-        <ImageView android:layout_width="50dp"
-                   android:layout_height="50dp"
-                   android:src="@drawable/ic_medicine"
-                   android:id="@+id/image_view_lab_services" android:tint="@android:color/holo_orange_dark"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Lab Services"
-                  android:textColor="@android:color/black"
-                  android:textSize="21dp"
-                  android:textAlignment="center"
-                  android:layout_gravity="center_vertical"
-                  android:id="@+id/text_view_lab_services"/>
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal" android:id="@+id/linear_layout_acute">
-        <ImageView android:layout_width="50dp"
-                   android:layout_height="50dp"
-                   android:src="@drawable/ic_frown"
-                   android:id="@+id/image_view_acute" android:tint="@android:color/holo_green_dark"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Acute Episodic Disease Management"
-                  android:textColor="@android:color/black"
-                  android:textSize="21dp"
-                  android:textAlignment="textStart"
-                  android:layout_gravity="center_vertical"
-                  android:id="@+id/text_view_acute"/>
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal" android:id="@+id/linear_layout_std">
-        <ImageView android:layout_width="50dp"
-                   android:layout_height="50dp"
-                   android:src="@drawable/ic_chart"
-                   android:id="@+id/image_view_std_testing"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="STD Testing"
-                  android:textColor="@android:color/black"
-                  android:textSize="21dp"
-                  android:textAlignment="textStart"
-                  android:layout_gravity="center_vertical"
-                  android:id="@+id/text_view_std_testing"/>
-    </LinearLayout>
-
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical">
+            <TextView android:id="@+id/text_view_clinic_name"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="Clinic Name"
+                      android:textColor="@android:color/black"
+                      android:textAlignment="center" android:textSize="18sp"/>
+            <ImageView android:id="@+id/image_view_clinic"
+                       android:layout_width="350dp"
+                       android:layout_height="160dp"
+                       android:scaleType="fitCenter"
+                       android:layout_gravity="center_horizontal"/>
+            <TextView android:id="@+id/text_view_street_address"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="123 Clinic Lane."
+                      android:textColor="@android:color/black"
+                      android:textSize="15sp"
+                      android:textAlignment="center"/>
+            <TextView android:id="@+id/text_view_city_state_zip"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="Charlotte, NC 28277"
+                      android:textColor="@android:color/black"
+                      android:textSize="15sp"
+                      android:textAlignment="center"/>
+            <Space android:layout_width="match_parent"
+                   android:layout_height="24dp"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textColor="@android:color/black"
+                      android:text="Services" android:textSize="18sp"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal" android:id="@+id/linear_layout_primary">
+                <ImageView android:layout_width="50dp"
+                           android:layout_height="50dp"
+                           android:src="@drawable/ic_hospital" android:id="@+id/image_view_primary_care"
+                           android:tint="@android:color/holo_red_dark"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Primary Medical Care"
+                          android:textColor="@android:color/black"
+                          android:textSize="21dp" android:textAlignment="center"
+                          android:layout_gravity="center_vertical"
+                          android:id="@+id/text_view_primary_care"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal" android:id="@+id/linear_layout_dental">
+                <ImageView android:layout_width="50dp"
+                           android:layout_height="50dp"
+                           android:src="@drawable/ic_smile" android:id="@+id/image_view_dental"
+                           android:tint="?attr/colorPrimaryDark"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Dental"
+                          android:textColor="@android:color/black"
+                          android:textSize="21dp"
+                          android:textAlignment="center"
+                          android:layout_gravity="center_vertical"
+                          android:id="@+id/text_view_dental"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal" android:id="@+id/linear_layout_mental">
+                <ImageView android:layout_width="50dp"
+                           android:layout_height="50dp"
+                           android:src="@drawable/ic_group"
+                           android:id="@+id/image_view_mental_health" android:tint="@android:color/holo_blue_dark"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Mental Health Services"
+                          android:textColor="@android:color/black"
+                          android:textSize="21dp"
+                          android:textAlignment="center"
+                          android:layout_gravity="center_vertical"
+                          android:id="@+id/text_view_mental_health"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal" android:id="@+id/linear_layout_chronic">
+                <ImageView android:layout_width="50dp"
+                           android:layout_height="50dp"
+                           android:src="@drawable/ic_hourglass"
+                           android:id="@+id/image_view_chronic"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Chronic Disease Management"
+                          android:textColor="@android:color/black"
+                          android:textSize="21dp"
+                          android:textAlignment="center"
+                          android:layout_gravity="center_vertical"
+                          android:id="@+id/text_view_chronic"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal" android:id="@+id/linear_layout_lab">
+                <ImageView android:layout_width="50dp"
+                           android:layout_height="50dp"
+                           android:src="@drawable/ic_medicine"
+                           android:id="@+id/image_view_lab_services" android:tint="@android:color/holo_orange_dark"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Lab Services"
+                          android:textColor="@android:color/black"
+                          android:textSize="21dp"
+                          android:textAlignment="center"
+                          android:layout_gravity="center_vertical"
+                          android:id="@+id/text_view_lab_services"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal" android:id="@+id/linear_layout_acute">
+                <ImageView android:layout_width="50dp"
+                           android:layout_height="50dp"
+                           android:src="@drawable/ic_frown"
+                           android:id="@+id/image_view_acute" android:tint="@android:color/holo_green_dark"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Acute Episodic Disease Management"
+                          android:textColor="@android:color/black"
+                          android:textSize="21dp"
+                          android:textAlignment="textStart"
+                          android:layout_gravity="center_vertical"
+                          android:id="@+id/text_view_acute"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal" android:id="@+id/linear_layout_std">
+                <ImageView android:layout_width="50dp"
+                           android:layout_height="50dp"
+                           android:src="@drawable/ic_chart"
+                           android:id="@+id/image_view_std_testing"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="STD Testing"
+                          android:textColor="@android:color/black"
+                          android:textSize="21dp"
+                          android:textAlignment="textStart"
+                          android:layout_gravity="center_vertical"
+                          android:id="@+id/text_view_std_testing"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
