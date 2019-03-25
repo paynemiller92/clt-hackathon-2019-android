@@ -5,13 +5,8 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 class Clinic() : Parcelable {
-    @SerializedName("city")
     var city: String? = null
-
-    @SerializedName("faxNumber")
     var faxNumber: String? = null
-
-    @SerializedName("fee")
     var fee: Double? = null
 
     @SerializedName("isAppointmentOnly")

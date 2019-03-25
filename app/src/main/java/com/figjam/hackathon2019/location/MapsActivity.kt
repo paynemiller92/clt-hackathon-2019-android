@@ -19,10 +19,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import com.figjam.hackathon2019.R
 import com.figjam.hackathon2019.clinic.ClinicDetailActivity
-import com.figjam.hackathon2019.clinic.ClinicRepository
 import com.figjam.hackathon2019.clinic.ClinicViewModel
 import com.figjam.hackathon2019.models.Clinic
 import com.google.android.gms.maps.model.LatLng
@@ -77,6 +75,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     }
 
+
+
+
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
             LOCATION_PERMISSION -> {
@@ -96,7 +98,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
             override fun onLocationChanged(location: Location) {
                 locationViewModel.currentLocation.value = LatLng(location.latitude, location.longitude)
-                locationManager.removeUpdates(this)
+                if (location.hasAccuracy()) {
+                    locationManager.removeUpdates(this)
+                }
             }
 
             override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {
@@ -112,7 +116,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         if (checkLocationPermission()) {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0f, locationListener)
         } else {
-            ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION)
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION)
         }
 
     }
@@ -126,7 +130,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private fun markClinics(clinics: List<Clinic>) {
         googleMap?.clear()
         clinicMarkerMap?.clear()
-        for (clinic: Clinic in clinics) {
+        for (clinic in clinics) {
             val marker: Marker? = googleMap?.addMarker(
                 MarkerOptions()
                     .position(LatLng(clinic.latitude!!, clinic.longitude!!))
